@@ -1,0 +1,274 @@
+        def start_request(self):
+        ua = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 \
+            (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+        yield Request('https://movie.douban.com/top250',headers=ua)
+		item["stu"]=response.xpath("//span[@class='course-view']/text()").re('\d+') #正则匹配取出其中的数字
+		
+0. 例如 tensorflow 的模块已经从网上下载到本地，安装指令跟本地安装相同：pip install tensorflow...whl
+1.在http://www.aeink.com/383.html 提取user-agent 作为代理池。用scrapy框架爬取,很不幸。不成功。
+	改换成普通代码，succeed ！2017-12-12 01:36:34
+	使用xpath，遇到一个难题：<article class="article-content">
+<p>
+	// 分析平台：Windows 7 64 位；其中，<span>Internet Explorer 10 浏览器和&nbsp;</span><span>Internet Explorer 11 浏览器以及</span><span>微软 Edge 浏览器为 Windows 10 64 位。</span> 
+</p>
+<p>
+	<span><span>Chrome｜</span>谷歌浏览器</span><br />
+<span>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.87 Safari/537.36</span> 
+</p>
+<p>
+	<span><span>Firefox｜</span>火狐浏览器</span><br />
+<span>Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0</span> 
+</p>
+也就是说，所有内容都在P标签下面的span内，但是所有p标签都在一个article标签内。
+	查询xpath的语法，终于知道了一点：通配符（*）的作用。一次性提取p标签下所有标签（这里恰好是：第一层span）的内容
+	一次性提取span标签下面的全部的内容：ua = rst.xpath('article[@class="article-content"]/p/*/text()')[4:-2]
+	一次性提取多个子节点中的内容 <div class='content'> 我爱<span>python</span><span>简洁方便</span></div>
+	data=response.xpath('//div[@class="content"]').xpath('string(.)')   即可取出所有内容：我爱python，简洁方便
+	所有内容在一个标签内，并且内容的标签都一样。如<p class='name_list'><tr>123</tr><tr>456</tr><tr>789</tr><tr>32</tr></p>
+	ip_port = etree.HTML(content).xpath('//table[@id="ip_list"]')
+    for i in range(50):
+          ip = ip_port[i].xpath('//tr[@class="odd"]/td[2]/text()')
+          print(ip) #此刻的ip是该页面所有ip，50个。
+	for ip in ip_port:
+		ips =ip.xpath('tr[@class="odd"]/td[2]/text()') #ips 是包含50条ip的列表。
+	comment = data.xpath("//p[@class='comment_txt']")
+	for i in range(len(comment)):
+		info = comment[i].xpath('string(.)')
+conn.commit()#使用支持事务的引擎，如INnodB存储引擎，执行所有sql语句，期间可以回滚，最后务必提交
+mysql 数据库中改变字段长度和类型，可以选用>>>alter table useragent modify column ua char(234) 定长的数据最好选用char(),节省空间，效率高，能用tinyint 的不选用int.
+2. 2017-12-14 01:23:34 现在找到补个毛病，就是贪多求快。看的资料很多，记下的很少，真正用pycharm写代码的时候，问题就暴露了。
+已经修改一晚上才改好 。这本不是一个很难的爬虫。要注意：看推文，视频，要有重点。最好列一个计划表。
+今晚是找名称所在标签，看得眼花。 
+3.2017-12-15 02:07:43 今天解决了昨晚的问题，能够写出功能独立的函数。 感叹scrapy 框架的灵活和多功能。
+mysql 完全改变字段 >>> alter table trip change column rank phone varchar(64)
+4.for i in enumerate([1,2,3,4,5],100):
+	print(i,end=' ')
+Python 的运行结果是：
+(100, 1) (101, 2) (102, 3) (103, 4) (104, 5)    
+5. 时间输出格式：
+  >>>  import datetime
+  >>>  datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S') 注意：只有月日是小写，其余都是大写。
+  >>>  '2017-12-16 21-12-50'
+6. 猎聘网爬取工作要求的时候。request = ' | '.join(item.get('request')[i:i+4]) 等价于[i:]这里需要注意，
+   #因为request是一个列表(4个元素)，request[i]：默认第一个元素，不用切片，取不出来 
+7. 判断页面返回状态，如果是html = urllib.request.urlopen(url) 在打开的同时可以用html.getcode() 
+   判断返回状态码 如果是200,说明正常。
+   如果是requests，html = requests.get(url).status_code html==200 ,说明正常
+8. s = '$%^&'
+>>> c = [ord(a) for a in s]
+>>> c
+[36, 37, 94, 38]        说明ord()函数可以将特殊字符或布尔类型转化为对应ascII 如ord('A')=65,ord('a')=97,ord('false')=0
+9. link = ['http://www.baidu','www.sina.com','https://www.qwealibaba','www.tecent.com']
+>>> lin = [i if ('https://' in i)  else ('https://'+i) for i in link] 足见python的简洁
+>>> lin
+['https://http://www.baidu', 'https://www.sina.com', 'https://www.qwealibaba', 'https://www.tecent.com']
+10.fname = "D:\\Python36\\Lib\\site-packages\\data\\start_26\\little\\weibo.html"
+with open(fname,'r',encoding='utf-8') as fh: #终于succeed！记住这个写法 解决了字符串编程树结构的难题
+     data = fh.read()
+     print(len(data))
+data = etree.HTML(data)           今晚遇到一个难题：关于表情在代码中的编码错误。直接从网页爬评论。有时可以避免。
+ 
+12. with open("D:\\Python36\\Lib\\site-packages\\data\\prac\\tab.txt",encoding='gbk') as fh:
+		content = fh.readline() : #按行读取
+		if content:
+			print(content)
+		else:
+			break
+13. import requests
+	s = requests.Session()
+	rst = s.post(url,data=data,headers = headers) #取得cookies，下次访问别的网页使用
+	html3 = s.get('https://www.hellobi.com/u/91791',cookies=rst.cookies,headers=headers) #使用rst获得cookies访问个人主页
+	data3 =etree.HTML(html3.content)
+14. 在hellobi天善网站测试出了cookies ，每次成功登录后，服务器会发送‘身份证’cookies到本地客户端，方便下次登录。
+	cookies={'XSRF-TOKEN': 'eyJpdiI6InNOQTE1dG40VnVxaFdoQm5Vb3hnbWc9PSIsInZhbHVlIjoiM1wvbTkreTZDRE9kVm5PSzg5TWNGd2tCWW1iZk8zTlFHa3VWbjluY1FQNTJiV3Z0UmFwV21NY28wcXY5ZEZZRHRWRTVPOFhoYmZQZFN2Zjk4YzZzTjFRPT0iLCJtYWMiOiJkMTExNTIzN2RmMDk2NTI0ZGE3YTAwZWM3NjNiN2ZkMDJjMTY5ODZhY2ZjMjFjMTk5MmMzYmNmNWNiYTUyY2Q4In0%3D', 'laravel_session': 'eyJpdiI6IllNOEtoWmk3T09yNzRVSjd1MVNsMFE9PSIsInZhbHVlIjoiWnJ2TTBBd1ViXC8zeTRLMXcwem9sN0lDbkhxRmJPVlV1THo2NzZscU1ndVdudkhoSExqV3pVU2V3Z1F0NGRreTI2OXc1UVhrUlRPSU1nRUtFV2hDQlhnPT0iLCJtYWMiOiJiZDBjOGQ2MzcwNTMyNDhiMjU2NzdiMzlmZjllMmRhZDc1Nzg5MGMwOGRiNzI3ZGEwYTE1MTUyNzlhM2JmNjA3In0%3D'}  看得出来，是一个字典。观察登录后的请求行里面那的Set-Cookie:XSRF-TOKEN=eyJpdiI6InpJbzVvUE9mMWpITGN1MWFSdXppamc9PSIsInZhbHVlIjoicm5iSmxNSUEyRWpcL1RSajkxWTZWZmVZWnAxXC9VS1JFeE1VQ1pcL2h2Z1pKOFwvMGJJTnFFajN2V1hoelF0WVh4UUMrXC9aYmtuT0NDbUpcL3g4ZWNxSWQzZ2c9PSIsIm1hYyI6IjIzZmM5NzRkOTZmNzI4NTEzNjYyMDJkN2U1NDg5ZmMwNzhjMGViZDlmY2UwYjEzNjgzYzI1ZjNjNDdiNWQ2YWYifQ%3D%3D
+	还有 注意是第一个分号前的内容。 Set-Cookie:laravel_session=eyJpdiI6IlwvK3VvQzRSWDJtRDlkR3ByNzZVNlhBPT0iLCJ2YWx1ZSI6Ik1wUWNzWTBoaEt4eThMbm9tM2x4SHBYVzdiRUVQeGt2Sm50UjZHd2g5Wm1CV3NlZXU0THZCZldPdjk4YmZVTWNmZHBBQXVQSDFJaE5XZDBaeEt6d1NRPT0iLCJtYWMiOiIyYjBjYjU5OWMwY2RmZGI3ZWE5ZDYwMzVmNGFiZGU3M2Y1YTgwMmU5MzQ0ODI0NjBhM2UzMmQ4ZTU0OTllOGI0In0%3D 
+	恰好是这两部分构成的字典，就是cookies。 
+	url2 ='https://www.hellobi.com/u/91791' #登录后跳转到页面,个人中心
+cookies={'XSRF-TOKEN': 'eyJpdiI6InNOQTE1dG40VnVxaFdoQm5Vb3hnbWc9PSIsInZhbHVlIjoiM1wvbTkreTZDRE9kVm5PSzg5TWNGd2tCWW1iZk8zTlFHa3VWbjluY1FQNTJiV3Z0UmFwV21NY28wcXY5ZEZZRHRWRTVPOFhoYmZQZFN2Zjk4YzZzTjFRPT0iLCJtYWMiOiJkMTExNTIzN2RmMDk2NTI0ZGE3YTAwZWM3NjNiN2ZkMDJjMTY5ODZhY2ZjMjFjMTk5MmMzYmNmNWNiYTUyY2Q4In0%3D', 'laravel_session': 'eyJpdiI6IllNOEtoWmk3T09yNzRVSjd1MVNsMFE9PSIsInZhbHVlIjoiWnJ2TTBBd1ViXC8zeTRLMXcwem9sN0lDbkhxRmJPVlV1THo2NzZscU1ndVdudkhoSExqV3pVU2V3Z1F0NGRreTI2OXc1UVhrUlRPSU1nRUtFV2hDQlhnPT0iLCJtYWMiOiJiZDBjOGQ2MzcwNTMyNDhiMjU2NzdiMzlmZjllMmRhZDc1Nzg5MGMwOGRiNzI3ZGEwYTE1MTUyNzlhM2JmNjA3In0%3D'}
+html3 = s.get(url2,cookies=cookies,headers=headers)  #都不用登录，直接带上cookies 跳转到登录后才能访问的页面。
+15. #2017-12-26 21:30:90 今晚可算是利用selenium + Firefox 成功模拟点击百度查询
+	#原因是geckodriver版本过低，现在升级到 19.0 bingo！ 不知道why谷歌老不行@
+16. git config --global user.name "tempoker"           git config --global user.email "1578"
+    git 新窗口产看过去版本号   git reflog --oneline 或者 git log --[(pretty=)]oneline
+    git clone 加上github中代码链接 直接将远程代码下载（克隆）到本地目录
+	git push -u origin master  从本地推送到github远程库管理
+	git commit --amend 直接将工作目录修改的代码提交到仓库，不产生新的快照（提交到仓库的版本）
+	此时 单击i表示insert 插入注释 即编辑模式 完事后一次ESC，然后Shift+2次字母Z 保存退出！
+	要是没有注释添加，直接:q!再回车              discard:丢弃
+	git checkout -- file.name 在工作目录误删文件，从暂存区复制恢复文件。
+	git rm file.name 误操作导致误删文件。恢复方法：
+	git reset + 新版本快照ID 此时该文件已经处于在工作目录误删的状态，直接恢复在本地：git checkout -- file.name 
+	git config -l 获取用户基本信息。 
+	git branch f1 #创建分支called f1	 前两步等价于 git checkout -b f1  创建并切换到called f1的分支
+	git checkout f1 #切换到分支 f1    然后在仓库中添加，修改了文件后保存。
+	git checkout master #切回主分支   此刻能观察到在分支中做的修改，完全隐藏起来。
+	git merge f1 #合并分支，分支中做的增加，修改体现出来。
+	git log --decorate --oneline --graph --all #查看操作日志，能看到分支的存在，想要再次在分支中操作，可以切换到分支。
+	git branch -d f1 #分支操作完毕之后，删除分支。
+17. for i in img_url:   #亮点在于系统拼接目录+文件名的形式
+    file_name = i.split("/")[-1]
+    download_path = "E:\\github\\tieba"
+    dist = os.path.join(download_path, file_name)
+    urllib.request.urlretrieve(i, dist)
+18. u = '体验微博'
+	e = u.encode()
+	e : b'\xcc\xe5\xd1\xe9\xce\xa2\xb2\xa9'
+	e.decode('gbk') 默认utf-8 两者换着来
+	e : '体验微博'
+19. import datetime
+	datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+	'2018-01-02 00:59:23'
+20.
+select * from table limit m ； 等价于limit 0,m ; 
+select * from table limit m,1000; 表示从m+1到结尾，只要尾数大于表达行数，1000可以是10000
+select * from table limit m,n;查询某表中的从m+1开始计数，n条数据,m为索引从0开始取值
+a1 = '脖子酸'
+b1 = 1.2
+sql = 'insert into test values(null,%s,default,%s,default,)'
+try:
+     with conn.cursor() as cursor:
+          cursor.execute(sql,(a1,b1))
+          conn.commit()
+          cursor.close()
+finally:
+     conn.close()
+11. #在mysql中去重查询，distinct 放在最前面，后面跟的务必是非默认。不然不能去重 
+    cursor = conn.cursor() #在mysql中去重查询，distinct 放在最前面，后面跟的务必是非默认。不然不能去重 
+	a1='供电所让亲自下去查'  # select distinct name,money from test;
+	b1=9898  #防止sql注入，应该采用 %s 占位符   试过了，单独使用sql=''的语句,不行！
+	cursor.execute("insert into test values(null,%s,default,%s,default)",(a1,b1))
+	conn.commit()
+	cursor.close()
+	conn.close()
+21. pip install fake_useragent 所有headers
+    import requests 
+    from random imoirt random 
+	from fake_useragent import UserAgent
+	ua = UserAgent()
+	headers = {'User-Agent':ua.random}
+	resp = requests.get(url,headers=headers)
+	if resp.status_code == 200:
+22. scrapy 一种去重方法,注意第三个参数：scrapy.Request(url,callback=self.parse,dont_filter=False)
+23. 使用selenium+Firefox 实现自动功能，滚动条下拉到底部或顶部，方法如下：
+	js="var q=document.documentElement.scrollTop=10000"  10000:底部   0：顶部
+	browser.execute_script(js)
+24. 2018-01-07 12:52:23 今天开始下载安装redis ，注意事项如下：
+    1. redis运行时出错：Creating Server TCP listening socket 127.0.0.1:6379: bind: No error         解决方案：依次进行以下步骤：1.redis-cli.exe  2.shutdown   3.exit   4.redis-server   
+	结果：redis-cli失效，原因是redis服务关闭。解决方法-启动redis服务：net start redis
+	2.部署Redis
+	其实Redis是可以安装成windows服务的，开机自启动，命令如下:
+	[12116] 10 Dec 10:39:16.588 # HandleServiceCommands: system error caught. error code=1073, message = CreateService failed: unknown error
+	原因：系统服务中已经存在
+	解决办法：
+	先卸载服务再安装：
+	redis-server --service-uninstall
+	然后在：cmd中输入
+	redis-server --service-install redis.windows.conf
+	3. 在redis.windows.conf 中解除注释，修改：maxmemory 209715200 
+25. 今天 2018-01-08 20:57：43 从github 上clone了scrapy-redis diamond，着手分布式爬虫。具体如下：
+	@分布式爬虫：几台服务器部署同样的爬虫代码，各自爬取的内容在各自电脑数据库，关联在于：几台电脑全都从redis里取去重的url
+	1. 将clone下来的scrapy-redis包复制到项目下面，跟scrapy.cfg 同级目录。
+	2. 在settings文件中，添加从github复制而来的： 
+	SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+	DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+	ITEM_PIPELINES = {
+    'scrapy_redis.pipelines.RedisPipeline': 300
+	}
+	3. 在核心爬虫文件中设置如下：
+	from scrapy_redis.spiders import RedisSpider
+	class LessonSpider(RedisSpider):
+		name = 'lesson'
+		allowed_domains = ['hellobi.com']
+		redis_key = 'hellobi:start_url' #这是redis中的key,手动输入的第一个url就是value
+	def parse(self, response):
+		item = TiansItem()       #extract_first(""):取list中第一个元素
+        item["title"]=response.xpath("//ol[@class='breadcrumb']/li[@class='active']/text()").extract_first("") 
+	4. 先在cmd 命令或者pycharm 中terminals 输入：scrapy crawl lesson   程序会开始运行，然后等待
+	这时候在redis-cli 输入格式如下：    lpush redis_key value
+	将第一个请求url lpush到redis_key中：lpush hellobi:start_url https://edu.hellobi.com/course/1
+	5. 如果开启远程访问，则在redis-config 文件中
+	若想指定多个ip:port访问，但并不是全部，解决方案：bind ip addresses
+	redis3.2之后，redis增加了protected-model，这模式下，即使注释了bind 127.0.0.1 在访问127.0.0.1 还是出错
+	解决方案：修改参数，protected-model yes  改成protected-model no
+	或者 在settings.py 文件中添加一条：REDIS_URL='redis://root:redistest@120.27.34:6379' 格式：REDIS_URL='redis://user:pass@hostname:port'     注意：在远程服务器上要部署同样的爬虫代码，选用git clone
+26. 将selenium集成到scrapy的具体步骤如下：
+	1. 书写中间件：先在middlerware.py 文件中添加一段如下代码：
+	import time
+	from scrapy.http import HtmlResponse
+	class JSPageMiddleware(object):
+	
+		def process_request(self,request,spider):
+			if spider.name == "dangd":
+				spider.browser.get(request.url)
+				time.sleep(3)
+	 			print("访问:{0}".format(request.url))
+				return HtmlResponse(url=spider.browser.current_url,body=spider.browser.page_source,\
+									encoding='utf-8',request=request)
+	2.  添加中间件到settings.py 文件，解除中间件注释，修改为自定义名称具体如下：
+	DOWNLOADER_MIDDLEWARES={
+	'dd.middlewares.JSPageMiddleware':1            
+	}
+	3. 在核心爬虫文件中，添加如下设置：
+	from selenium import webdriver
+	from scrapy.xlib.pydispatch import dispatcher #分发器
+	from scrapy import signals #信号
+	class DangdSpider(scrapy.Spider):
+		
+		def __init__(self):
+			self.browser = webdriver.Firefox()
+			super(DangdSpider,self).__init__()#继承的是本class父类
+			dispatcher.connect(self.spider_closed,signals.spider_closed)
+		
+		def spider_closed(self,spider):
+			#当爬虫退出的时候，浏览器也关闭。
+			print("spider:{0} closed......".format(spider.name))
+			self.browser.quit()
+27. with open('tieba.txt','a') as fh:  #避免多次打开/关闭文件
+		for i in range(8):
+			fh.write(data[i].strip())
+28. requests库可以直接配置代理参数，形式如：requests.get(url,headers,proxies={'http':'ip:port'})
+		案例一：2018-01-16 00:40:54 运气好，测试出了以下这个ip能返回200状态码
+		code =requests.get('http://www.qiushibaike.com/8hr/page/2',headers=headers,\
+									proxies={'http':'122.114.31.177:808'}).status_code
+29. from  multiprocessing import Pool as ThreadPool
+	urls = ['http://www.qiushibaike.com/8hr/page/{num}'.format(num=i) for i in range(1,21)]
+	pool ThreadPool(12)
+	results = pool.map(requests.get,urls) #也就是把每个url传进requests.get()函数，总的结果复制给results
+	pool.close()
+	pool.join()
+30. #2017-11-28 01:58:34   可算是把wampserver 成功安装了。注意：是安装在根目录下。如E：
+#第一次登陆phpmyadmin 是没有密码的，登录后，选择用户，勾选一个，修改密码。这样mysql控制台和后台都修改了密码。
+#不知道why，mysql中的user表，没有password这个字段，只能通过phpmyadmin后台来改。
+#创建一张表的时候，注意最后的 ->）engine=innodb，character set utf8 ；
+31. gb18030 向下兼容gbk/gb2312，涵盖面更广。存在中文字符，可以使用decode('gb18030','ignore')
+32. reduce 在python 3.X 不属于内置函数，需要引用 from functools import reduce
+print(reduce(lambda x,y : x*y,range(1,10))) #表示1-10的阶乘 过程：f(f(f(1,2),3),4)
+powercmd注册码
+推荐一个很方便的软件：powercmd
+用户名:nzone 注册码:PCMDA-86128-PCMDA-70594  。
+下载地址网上很多：
+http://soft.hao123.com/soft/appid/49656.html
+
+a = 'www://fsbvu.com'
+b = a.split('/') =>['http:', '', 'www.baidu,com']   说明是按照/逐一分开，得到多个字符串组成的列表
+c = '/'.join(b) =>'http://www.baidu,com'      说明是逐个字符元素之间用/连接起来，得到连接后的字符串
+c='www.baidu.;com    '  c.strip()内置方法，去掉字符内靠前,后的空白符 
+e = re.sub(';','',c) 作用是替换掉字符变量c中的;（分号）
+33. ssl._create_default_https_context = ssl._create_unverified_context()#关闭ssl证书验证
+34. 2018-01-20 15:06:56 昨晚开始着手mongodb 从一个从事爬虫工程师的哥们得知，这种nosql数据库是大趋势，很多公司面试要问
+	下载以后：1.解压/安装在某盘符根目录如e:\mongodb   2.创建文件夹 d:\mongodb\data\db,d:\mongodb\data\log,在log文件夹新建mongodb.log
+	3. 运行cmd.exe jinru dos命令界面，执行以下命令：> cd e:mongodb\bin    >e:\mongodb\bin>mongod -dbpath=..\data\db (或者绝对路径)   看到提示：waiting for connections on port 27017 说明正常
+	4. 测试连接 新开一个cmd窗口，切换到bin目录，输入>e:\mongodb\bin\mongo 连接到数据库即成功。
+	5.将mongodb安装为windows服务  首先进入bin目录 执行以下命令：
+	>E:\mongodb\bin>mongod --dbpath=E:\mongodb\data\da --logpath=E:\mongodb\data\log\MongoDB.log --install --serviceName "name"
+	MongoDB服务无法启动，windows提示发生服务特定错误：100
+	解决方法：1.找到数据库文件夹中的两个文件：mongod.lock 和 storage.bson 2.删除它们 3.net start MongoDB 启动成功
+	服务没响应控制功能，原因在于：--logpath的路径出错 >net start MongDB   解决方法：1.从服务中删除以前的MongoDB服务
+	>sc delete MongoDB    2.新建一个windows服务 使用绝对路径，db和log务必正确  3.net start service 即可
+35. 粗心大意啊，害我调试这段代码来回多少次，居然是因为判断条件的book_info写成了book_onfo mongodb可视化工具一直没结果
+36. 2018-01-30 17:50:43 读取mongodb数据库，转化为数据框的步骤如下：
+	1.连接数据库，指定collection（类似于表）
+	2.sql = db.name.find({'':''}).limit() #按条件查询，限制输出数量
+	3.data = pda.DataFrame(list(sql)) #sql是一个pymongo.cursor
+	4.del data['_id'] #删除_id这一列，得到需要的数据
+	5.data.to_excel('\name.xls',index=False)
